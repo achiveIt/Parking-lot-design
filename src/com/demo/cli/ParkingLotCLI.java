@@ -6,10 +6,10 @@ public class ParkingLotCLI {
     public static void init(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter the number of floors you  would like to have in parking lot: ");
+        System.out.print("Please enter the number of floors you  would like to have in parking lot: ");
         int  numOfFloors = readPositiveInt(scanner);
 
-        System.out.println("Please enter the number of spots you  would like to have in each floor: ");
+        System.out.print("Please enter the number of spots you  would like to have in each floor: ");
         int spotsPerFloor = readPositiveInt(scanner);
 
         ParkingLotService parkingLot = new ParkingLotServiceImpl(numOfFloors, spotsPerFloor);
@@ -19,11 +19,17 @@ public class ParkingLotCLI {
         commandHandler.start();
     }
     private static int readPositiveInt(Scanner scanner) {
-        while (!scanner.hasNextInt()) {
-            System.out.print("Invalid input! Please enter a valid number: ");
-            scanner.next();
+        while (true) {
+            try {
+                int value = Integer.parseInt(scanner.nextLine().trim());
+                if (value > 0) {
+                    return value;
+                } else {
+                    System.out.print("Please enter a positive number: ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input! Please enter a valid number: ");
+            }
         }
-        int value = scanner.nextInt();
-        return (value > 0) ? value : readPositiveInt(scanner);
     }
 }
