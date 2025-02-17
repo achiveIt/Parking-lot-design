@@ -15,16 +15,24 @@ import java.util.List;
 import java.util.Map;
 
 public class ParkingLotServiceImpl implements ParkingLotService {
+    private static ParkingLotServiceImpl instance;
     private List<FloorService> floors;
     private Map<String, List<Integer>> vehicleLocation;
 
-    public ParkingLotServiceImpl(int numOfFloors, int numOfSpotsPerFloor) {
+    private ParkingLotServiceImpl(int numOfFloors, int numOfSpotsPerFloor) {
         this.floors = new ArrayList<>();
         this.vehicleLocation = new HashMap<>();
 
-        for(int i = 0; i < numOfFloors; i++){
+        for (int i = 0; i < numOfFloors; i++) {
             floors.add(new FloorServiceImpl(i + 1, numOfSpotsPerFloor));
         }
+    }
+
+    public static synchronized ParkingLotServiceImpl getInstance(int numOfFloors, int numOfSpotsPerFloor) {
+        if (instance == null) {
+            instance = new ParkingLotServiceImpl(numOfFloors, numOfSpotsPerFloor);
+        }
+        return instance;
     }
 
     public VehicleService createVehicle(String vehicleNumber, VehicleType vehicleType) {
