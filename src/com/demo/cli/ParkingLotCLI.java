@@ -19,7 +19,6 @@ public class ParkingLotCLI {
         commandHandler.start();
     }
     private static int readPositiveInt(Scanner scanner) {
-        System.out.print("Enter a positive number: ");
         while (!scanner.hasNextInt()) {
             System.out.print("Invalid input! Please enter a valid number: ");
             scanner.next();
