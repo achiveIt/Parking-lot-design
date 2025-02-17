@@ -26,7 +26,16 @@ public class FloorServiceImpl implements FloorService {
     public List<Integer> parkVehicle(VehicleService vehicle) {
         VehicleType vehicleType = vehicle.getType();
         List<Integer> list = new ArrayList<>();
-        int requiredSpots = vehicleType == VehicleType.TRUCK ? Constants.TRUCK_SPOTS : Constants.CAR_BIKE_SPOTS;
+        int requiredSpots = 0;
+        if(vehicleType == VehicleType.TRUCK){
+            requiredSpots = Constants.TRUCK_SPOTS;
+        }
+        else if(vehicleType == VehicleType.CAR){
+            requiredSpots = Constants.CAR_SPOTS;
+        }
+        else if(vehicleType == VehicleType.BIKE){
+            requiredSpots = Constants.BIKE_SPOTS;
+        }
 
         for(int i = 0; i <= spots.size() - requiredSpots; i++){
             boolean canPark = true;
