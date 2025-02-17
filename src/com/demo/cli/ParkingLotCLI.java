@@ -12,7 +12,7 @@ public class ParkingLotCLI {
         System.out.print("Please enter the number of spots you  would like to have in each floor: ");
         int spotsPerFloor = readPositiveInt(scanner);
 
-        ParkingLotService parkingLot = new ParkingLotServiceImpl(numOfFloors, spotsPerFloor);
+        ParkingLotService parkingLot = ParkingLotServiceImpl.getInstance(numOfFloors, spotsPerFloor);
         System.out.println("Parking Lot Initialized with " + numOfFloors + " floors and " + spotsPerFloor + " spots per floor.");
 
         CommandHandler commandHandler = new CommandHandler(parkingLot);
