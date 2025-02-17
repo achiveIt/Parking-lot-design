@@ -35,24 +35,24 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         return instance;
     }
 
-    public VehicleService createVehicle(String vehicleNumber, VehicleType vehicleType) {
+    public VehicleService createVehicle(String vehicleNumber, VehicleType vehicleType){
         VehicleFactory vehicleFactory;
 
-        switch (vehicleType) {
-            case CAR:
-                vehicleFactory = new CarFactory(vehicleNumber);
+        switch(vehicleType){
+            case VehicleType.CAR:
+                vehicleFactory = CarFactory.getInstance();
                 break;
-            case BIKE:
-                vehicleFactory = new BikeFactory(vehicleNumber);
+            case VehicleType.BIKE:
+                vehicleFactory = BikeFactory.getInstance();
                 break;
-            case TRUCK:
-                vehicleFactory = new TruckFactory(vehicleNumber);
+            case VehicleType.TRUCK:
+                vehicleFactory = TruckFactory.getInstance();
                 break;
             default:
                 return null;
         }
 
-        return vehicleFactory.createVehicle();
+        return vehicleFactory.createVehicle(vehicleNumber);
     }
 
 
