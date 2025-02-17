@@ -10,17 +10,18 @@ public class InputReader {
     }
 
     public String readString(String input){
-        System.out.println(input);
+        System.out.print(input);
         return scanner.nextLine().trim();
     }
 
-    public int readInt(String input){
-        System.out.print(input);
-        while (!scanner.hasNextInt()) {
-            System.out.println("Invalid input! Please enter a number.");
-            scanner.next();
-            System.out.print(input);
+    public int readInt(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            try {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Please enter a number.");
+            }
         }
-        return scanner.nextInt();
     }
 }

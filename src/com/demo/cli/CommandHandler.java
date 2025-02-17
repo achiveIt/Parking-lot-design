@@ -3,6 +3,8 @@ package com.demo.cli;
 import com.demo.interfaces.ParkingLotService;
 import com.demo.enums.VehicleType;
 
+import static com.demo.enums.VehicleType.VEHICLE_TYPES;
+
 public class CommandHandler {
     private ParkingLotService parkingLot;
     private InputReader inputReader;
@@ -64,6 +66,11 @@ public class CommandHandler {
     private void parkVehicle(){
         String vehicleNumber = inputReader.readString("Please enter your vehicle number: ");
         String vehicleType = inputReader.readString("Please enter your vehicle type (Truck, Bike or Car): ").toUpperCase();
+
+        if (!VEHICLE_TYPES.contains(vehicleType)) {
+            System.out.println("Invalid vehicle type Please enter one of: " + VEHICLE_TYPES);
+            start();
+        }
 
         VehicleType type = VehicleType.valueOf(vehicleType);
         boolean success = parkingLot.parkVehicle(vehicleNumber, type);
