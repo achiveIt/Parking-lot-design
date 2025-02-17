@@ -23,8 +23,9 @@ public class FloorServiceImpl implements FloorService {
     }
 
     @Override
-    public boolean parkVehicle(VehicleService vehicle) {
+    public List<Integer> parkVehicle(VehicleService vehicle) {
         VehicleType vehicleType = vehicle.getType();
+        List<Integer> list = new ArrayList<>();
         int requiredSpots = vehicleType == VehicleType.TRUCK ? Constants.TRUCK_SPOTS : Constants.CAR_BIKE_SPOTS;
 
         for(int i = 0; i <= spots.size() - requiredSpots; i++){
@@ -41,24 +42,21 @@ public class FloorServiceImpl implements FloorService {
                 for(int j = 0; j < requiredSpots; j++){
                     spots.get(i+j).parkVehicle(vehicle);
                 }
-                return true;
+                list.add(1);
+                list.add(i);
+                return list;
             }
 
         }
 
-        return false;
+        list.add(0);
+        return list;
     }
 
     @Override
-    public boolean removeVehicle(String vehicleNumber) {
-        boolean remove = false;
-        for(ParkingSpotService spot: spots){
-            if(!spot.isAvailable() && spot.getParkedVehicle().getVehicleNumber().equals(vehicleNumber)){
-                spot.removeVehicle();
-                remove = true;
-            }
-        }
-        return remove;
+    public boolean removeVehicle(Integer spotNum) {
+        spots.get(spotNum).removeVehicle();
+        return true;
     }
 
     @Override
