@@ -1,14 +1,21 @@
 package com.demo.factories;
 
 import com.demo.interfaces.VehicleService;
+import com.demo.vehicles.Truck;
 
-public class Truck implements vehicleFactory{
+import static com.demo.enums.VehicleType.TRUCK;
+
+public class TruckFactory implements vehicleFactory{
 
     private String vehicleNumber;
+    private VehicleService vehicleService;
 
-    public Truck
+    public TruckFactory(String vehicleNumber){
+        this.vehicleNumber = vehicleNumber;
+        this.vehicleService = new Truck(this.vehicleNumber);
+    }
     @Override
     public VehicleService createVehicle() {
-        return null;
+        return vehicleService;
     }
 }
