@@ -4,16 +4,19 @@ import com.demo.interfaces.VehicleService;
 import com.demo.vehicles.Car;
 
 public class CarFactory implements VehicleFactory{
-    private final String vehicleNumber;
-    private final VehicleService vehicleService;
+    private static CarFactory instance;
 
-    public CarFactory(String vehicleNumber){
-        this.vehicleNumber = vehicleNumber;
-        this.vehicleService = new Car(this.vehicleNumber);
+    private CarFactory() {}
+
+    public static CarFactory getInstance(){
+        if(instance == null){
+            instance = new CarFactory();
+        }
+        return instance;
     }
 
     @Override
-    public VehicleService createVehicle(){
-        return vehicleService;
+    public VehicleService createVehicle(String vehicleNumber){
+        return new Car(vehicleNumber);
     }
 }

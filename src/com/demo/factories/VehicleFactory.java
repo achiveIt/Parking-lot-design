@@ -3,5 +3,5 @@ package com.demo.factories;
 import com.demo.interfaces.VehicleService;
 
 public interface VehicleFactory {
-    VehicleService createVehicle();
+    VehicleService createVehicle(String vehicleNumber);
 }
