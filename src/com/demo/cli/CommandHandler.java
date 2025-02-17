@@ -35,7 +35,7 @@ public class CommandHandler {
     private void printMenu(){
         System.out.println("\nChoose an option:");
         System.out.println("1. Check if Parking Lot is Full");
-        System.out.println("2. Check Available Spots");
+        System.out.println("2. Check Available Spots on a particular floor");
         System.out.println("3. Park Vehicle");
         System.out.println("4. Get Vehicle Location");
         System.out.println("5. Remove vehicle");
