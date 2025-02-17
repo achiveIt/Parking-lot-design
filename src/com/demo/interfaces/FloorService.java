@@ -2,6 +2,8 @@ package com.demo.interfaces;
 
 import com.demo.enums.VehicleType;
 
+import java.util.List;
+
 public interface FloorService {
 
     /**
@@ -9,14 +11,14 @@ public interface FloorService {
      * @param vehicle: VehicleService Object
      * @return boolean value depicting whether the vehicle is parked or not.
      * */
-    boolean parkVehicle(VehicleService vehicle);
+    List<Integer> parkVehicle(VehicleService vehicle);
 
     /**
      * Removes vehicle given vehicle number.
-     * @param vehicleNumber: vehicle number based on which we will identify the vehicle to be removed.
+     * @param spotNum: .
      * @return boolean value depicting whether the vehicle is removed or not.
      * */
-    boolean removeVehicle(String vehicleNumber);
+    boolean removeVehicle(Integer spotNum);
 
     /**
      * Get List of available spots in respect to a particular floor

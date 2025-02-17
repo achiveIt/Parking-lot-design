@@ -2,6 +2,8 @@ package com.demo.interfaces;
 
 import com.demo.enums.VehicleType;
 
+import java.util.List;
+
 public interface ParkingLotService {
 
     /**
@@ -11,7 +13,7 @@ public interface ParkingLotService {
      * @param vehicleNumber: It is the number plate of the vehicle.
      * @return boolean value
      * */
-    boolean parkVehicle(String vehicleNumber, VehicleType vehicleType);
+    List<Integer> parkVehicle(String vehicleNumber, VehicleType vehicleType);
 
     /**
      * Removes a vehicle from the parking lot based on its vehicle number

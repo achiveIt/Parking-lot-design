@@ -3,6 +3,8 @@ package com.demo.cli;
 import com.demo.interfaces.ParkingLotService;
 import com.demo.enums.VehicleType;
 
+import java.util.List;
+
 import static com.demo.enums.VehicleType.VEHICLE_TYPES;
 
 public class CommandHandler {
@@ -73,13 +75,14 @@ public class CommandHandler {
         }
 
         VehicleType type = VehicleType.valueOf(vehicleType);
-        boolean success = parkingLot.parkVehicle(vehicleNumber, type);
+        List<Integer> parkingInfo = parkingLot.parkVehicle(vehicleNumber, type);
 
-        if(success){
-            System.out.println("Vehicle " + vehicleNumber + " parked successfully");
+        if(parkingInfo.get(0) == 1){
+            System.out.println("Vehicle number " + vehicleNumber + " parked successfully at Location: Floor: " + parkingInfo.get(1) + " Spot: " + (parkingInfo.get(2) + 1));
         }else{
-            System.out.println("Sorry we are not left with any available spots required to park the vehicle");
+            System.out.println("Sorry no space left to park the vehicle");
         }
+
     }
 
     private void findVehicle(){

@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class ParkingLotServiceImpl implements ParkingLotService {
     private List<FloorService> floors;
-    private Map<String, Integer> vehicleLocation;
+    private Map<String, List<Integer>> vehicleLocation;
 
     public ParkingLotServiceImpl(int numOfFloors, int numOfSpotsPerFloor) {
         this.floors = new ArrayList<>();
@@ -49,27 +49,34 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
 
     @Override
-    public boolean parkVehicle(String vehicleNumber, VehicleType vehicleType) {
+    public List<Integer> parkVehicle(String vehicleNumber, VehicleType vehicleType) {
         VehicleService vehicle = createVehicle(vehicleNumber, vehicleType);
 
-        if(vehicle == null) return false;
+        List<Integer> parkingInfo = new ArrayList<>();
 
         for(FloorService floor : floors){
-            if(floor.parkVehicle(vehicle)){
-                vehicleLocation.put(vehicleNumber, floor.getFloorNumber());
-                return true;
+            List<Integer> spotDetails = floor.parkVehicle(vehicle);
+            int isPossible = spotDetails.get(0);
+            if(isPossible == 1){
+                int spotNumber = spotDetails.get(1);
+                parkingInfo.add(1);
+                parkingInfo.add(floor.getFloorNumber());
+                parkingInfo.add(spotNumber);
+                vehicleLocation.put(vehicleNumber, parkingInfo);
+                return parkingInfo;
             }
         }
-        return false;
+        parkingInfo.add(0);
+        return parkingInfo;
     }
 
     @Override
     public boolean removeVehicle(String vehicleNumber) {
-        Integer floorNumber = vehicleLocation.get(vehicleNumber);
-        if(floorNumber == null) return false;
+        List<Integer> parkingInfo = vehicleLocation.get(vehicleNumber);
+        if(parkingInfo == null) return false;
 
-        FloorService floor = floors.get(floorNumber - 1);
-        boolean removed = floor.removeVehicle(vehicleNumber);
+        FloorService floor = floors.get(parkingInfo.get(1) - 1);
+        boolean removed = floor.removeVehicle(parkingInfo.get(2));
 
         if(removed) vehicleLocation.remove(vehicleNumber);
         return removed;
@@ -90,20 +97,17 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         for(FloorService floor: floors){
             noOfSpot += floor.availableSpots();
         }
-        return noOfSpot == 0 ?  true : false;
+        return noOfSpot == 0;
     }
 
     @Override
     public String getVehicleLocation(String vehicleNumber) {
-        Integer floorNum = vehicleLocation.get(vehicleNumber);
+        List<Integer> parkingInfo = vehicleLocation.get(vehicleNumber);
 
-        if(floorNum == null){
+        if(parkingInfo == null){
             return "Sorry this vehicle is not parked in our parking lot";
         }
 
-        FloorService floor = floors.get(floorNum - 1);
-        Integer spotNum = floor.getVehicleSpot(vehicleNumber);
-
-        return "Floor: " + floorNum + ", Spot: " + spotNum;
+        return "Floor: " + parkingInfo.get(1) + ", Spot: " + parkingInfo.get(2) + 1;
     }
 }
