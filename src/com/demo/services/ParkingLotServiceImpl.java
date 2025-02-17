@@ -1,6 +1,10 @@
 package com.demo.services;
 
 import com.demo.enums.VehicleType;
+import com.demo.factories.VehicleFactory;
+import com.demo.factories.CarFactory;
+import com.demo.factories.BikeFactory;
+import com.demo.factories.TruckFactory;
 import com.demo.interfaces.FloorService;
 import com.demo.interfaces.ParkingLotService;
 import com.demo.interfaces.VehicleService;
@@ -23,10 +27,30 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         }
     }
 
+    public VehicleService createVehicle(String vehicleNumber, VehicleType vehicleType) {
+        VehicleFactory vehicleFactory;
+
+        switch (vehicleType) {
+            case CAR:
+                vehicleFactory = new CarFactory(vehicleNumber);
+                break;
+            case BIKE:
+                vehicleFactory = new BikeFactory(vehicleNumber);
+                break;
+            case TRUCK:
+                vehicleFactory = new TruckFactory(vehicleNumber);
+                break;
+            default:
+                return null;
+        }
+
+        return vehicleFactory.createVehicle();
+    }
+
 
     @Override
     public boolean parkVehicle(String vehicleNumber, VehicleType vehicleType) {
-        VehicleService vehicle = VehicleFactory.createVehicle(vehicleNumber, vehicleType);
+        VehicleService vehicle = createVehicle(vehicleNumber, vehicleType);
 
         if(vehicle == null) return false;
 
