@@ -31,13 +31,4 @@ public class ParkingSpotServiceImpl implements ParkingSpotService {
         this.parkedVehicle = null;
     }
 
-    @Override
-    public VehicleService getParkedVehicle() {
-        return this.parkedVehicle;
-    }
-
-    @Override
-    public int getSpotNumber() {
-        return this.spotNumber;
-    }
 }

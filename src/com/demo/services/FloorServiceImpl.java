@@ -84,13 +84,4 @@ public class FloorServiceImpl implements FloorService {
         return floorNumber;
     }
 
-    @Override
-    public int getVehicleSpot(String vehicleNumber) {
-        for(ParkingSpotService spot: spots){
-            if(!spot.isAvailable() && spot.getParkedVehicle().getVehicleNumber().equals(vehicleNumber)){
-                return spot.getSpotNumber();
-            }
-        }
-        return -1;
-    }
 }

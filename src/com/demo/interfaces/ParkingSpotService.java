@@ -19,15 +19,4 @@ public interface ParkingSpotService{
      * */
     void removeVehicle();
 
-    /**
-     * returns the vehicle which is parked at that spot
-     * @return VehicleService object (null if no vehicle is parked otherwise its object).
-     * */
-    VehicleService getParkedVehicle();
-
-    /**
-     * returns the spot number.
-     * @return Integer
-     * */
-    int getSpotNumber();
 }
