@@ -69,7 +69,12 @@ public class CommandHandler {
         String vehicleNumber = inputReader.readString("Please enter your vehicle number: ");
         String vehicleType = inputReader.readString("Please enter your vehicle type (Truck, Bike or Car): ").toUpperCase();
 
-        if (!VEHICLE_TYPES.contains(vehicleType)) {
+        if(!parkingLot.checkUniqueVehicleNumber(vehicleNumber)){
+            System.out.println("Sorry the vehicle with vehicle number " + vehicleNumber + " already parked, please check your vehicle number");
+            start();
+        }
+
+        if(!VEHICLE_TYPES.contains(vehicleType)){
             System.out.println("Invalid vehicle type Please enter one of: " + VEHICLE_TYPES);
             start();
         }
