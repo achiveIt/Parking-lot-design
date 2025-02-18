@@ -7,11 +7,27 @@ import java.util.List;
 public interface ParkingLotService {
 
     /**
+     *
+     * @param vehicleNumber: It is the number plate of the vehicle.
+     * @param vehicleType: Tells us whether the particular vehicle is car, bike or truck.
+     * @return VehicleService
+     */
+    VehicleService createVehicle(String vehicleNumber, VehicleType vehicleType);
+
+
+    /**
+     * Checks if the vehicle with the given number already exists or not.
+     * @param vehicleNumber: It is the number plate of the vehicle.
+     * @return boolean value
+     */
+    boolean checkUniqueVehicleNumber(String vehicleNumber);
+
+    /**
      * Parks a vehicle, given its number and its type which can be CAR, BIKE OR 
      * TRUCK.(Later we can add more depending on our use case)
      * @param vehicleType: Tells us whether the particular vehicle is car, bike or truck.
      * @param vehicleNumber: It is the number plate of the vehicle.
-     * @return boolean value
+     * @return List of integer
      * */
     List<Integer> parkVehicle(String vehicleNumber, VehicleType vehicleType);
 

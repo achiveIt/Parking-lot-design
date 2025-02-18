@@ -35,6 +35,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         return instance;
     }
 
+    @Override
     public VehicleService createVehicle(String vehicleNumber, VehicleType vehicleType){
         VehicleFactory vehicleFactory;
 
@@ -55,6 +56,11 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         return vehicleFactory.createVehicle(vehicleNumber);
     }
 
+
+    @Override
+    public boolean checkUniqueVehicleNumber(String vehicleNumber) {
+        return vehicleLocation.get(vehicleNumber) == null;
+    }
 
     @Override
     public List<Integer> parkVehicle(String vehicleNumber, VehicleType vehicleType) {
