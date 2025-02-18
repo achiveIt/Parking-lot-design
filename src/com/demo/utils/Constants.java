@@ -1,4 +1,4 @@
-package com.demo;
+package com.demo.utils;
 
 public class Constants {
     public static final int CAR_SPOTS = 1;
