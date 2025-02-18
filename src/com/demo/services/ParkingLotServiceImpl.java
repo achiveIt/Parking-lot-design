@@ -73,7 +73,11 @@ public class ParkingLotServiceImpl implements ParkingLotService {
             int isPossible = spotDetails.get(0);
             if(isPossible == 1){
                 int spotNumber = spotDetails.get(1);
-                parkingInfo.add(1);
+                if(vehicleType == VehicleType.TRUCK){
+                    parkingInfo.add(2);
+                }else{
+                    parkingInfo.add(1);
+                }
                 parkingInfo.add(floor.getFloorNumber());
                 parkingInfo.add(spotNumber);
                 vehicleLocation.put(vehicleNumber, parkingInfo);
@@ -88,9 +92,16 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     public boolean removeVehicle(String vehicleNumber) {
         List<Integer> parkingInfo = vehicleLocation.get(vehicleNumber);
         if(parkingInfo == null) return false;
+        boolean removed = false;
 
-        FloorService floor = floors.get(parkingInfo.get(1) - 1);
-        boolean removed = floor.removeVehicle(parkingInfo.get(2));
+        if(parkingInfo.get(0) == 2){
+            FloorService floor = floors.get(parkingInfo.get(1) - 1);
+            removed = floor.removeVehicle(parkingInfo.get(2));
+            removed = floor.removeVehicle((parkingInfo.get(2) + 1));
+        }else{
+            FloorService floor = floors.get(parkingInfo.get(1) - 1);
+            removed = floor.removeVehicle(parkingInfo.get(2));
+        }
 
         if(removed) vehicleLocation.remove(vehicleNumber);
         return removed;
@@ -122,6 +133,6 @@ public class ParkingLotServiceImpl implements ParkingLotService {
             return "Sorry this vehicle is not parked in our parking lot";
         }
 
-        return "Floor: " + parkingInfo.get(1) + ", Spot: " + parkingInfo.get(2) + 1;
+        return "Floor: " + parkingInfo.get(1) + ", Spot: " + (parkingInfo.get(2) + 1);
     }
 }
