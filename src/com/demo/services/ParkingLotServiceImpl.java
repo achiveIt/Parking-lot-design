@@ -1,5 +1,6 @@
 package com.demo.services;
 
+import com.demo.Constants;
 import com.demo.enums.VehicleType;
 import com.demo.factories.VehicleFactory;
 import com.demo.factories.CarFactory;
@@ -72,12 +73,12 @@ public class ParkingLotServiceImpl implements ParkingLotService {
             List<Integer> spotDetails = floor.parkVehicle(vehicle);
             int isPossible = spotDetails.get(0);
             if(isPossible == 1){
-                int spotNumber = spotDetails.get(1);
                 if(vehicleType == VehicleType.TRUCK){
-                    parkingInfo.add(2);
+                    parkingInfo.add(Constants.TRUCK_SPOTS);
                 }else{
-                    parkingInfo.add(1);
+                    parkingInfo.add(Constants.BIKE_SPOTS);
                 }
+                int spotNumber = spotDetails.get(1);
                 parkingInfo.add(floor.getFloorNumber());
                 parkingInfo.add(spotNumber);
                 vehicleLocation.put(vehicleNumber, parkingInfo);
@@ -94,7 +95,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
         if(parkingInfo == null) return false;
         boolean removed = false;
 
-        if(parkingInfo.get(0) == 2){
+        if(parkingInfo.get(0) == Constants.TRUCK_SPOTS){
             FloorService floor = floors.get(parkingInfo.get(1) - 1);
             removed = floor.removeVehicle(parkingInfo.get(2));
             removed = floor.removeVehicle((parkingInfo.get(2) + 1));
