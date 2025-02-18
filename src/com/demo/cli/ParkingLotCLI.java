@@ -6,10 +6,10 @@ public class ParkingLotCLI {
     public static void init(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter the number of floors you  would like to have in parking lot: ");
+        System.out.print("Please enter the number of floors you would like to have in parking lot: ");
         int  numOfFloors = readPositiveInt(scanner);
 
-        System.out.print("Please enter the number of spots you  would like to have in each floor: ");
+        System.out.print("Please enter the number of spots you would like to have in each floor: ");
         int spotsPerFloor = readPositiveInt(scanner);
 
         ParkingLotService parkingLot = ParkingLotServiceImpl.getInstance(numOfFloors, spotsPerFloor);

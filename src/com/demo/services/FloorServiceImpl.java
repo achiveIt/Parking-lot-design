@@ -1,6 +1,6 @@
 package com.demo.services;
 
-import com.demo.Constants;
+import com.demo.utils.Constants;
 import com.demo.enums.VehicleType;
 import com.demo.interfaces.FloorService;
 import com.demo.interfaces.ParkingSpotService;
