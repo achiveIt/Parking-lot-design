@@ -82,7 +82,7 @@ public class CommandHandler {
         VehicleType type = VehicleType.valueOf(vehicleType);
         List<Integer> parkingInfo = parkingLot.parkVehicle(vehicleNumber, type);
 
-        if(parkingInfo.get(0) == 1){
+        if(parkingInfo.get(0) == 1 || parkingInfo.get(0) == 2){
             System.out.println("Vehicle number " + vehicleNumber + " parked successfully at Location: Floor: " + parkingInfo.get(1) + " Spot: " + (parkingInfo.get(2) + 1));
         }else{
             System.out.println("Sorry no space left to park the vehicle");
