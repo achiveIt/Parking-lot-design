@@ -32,9 +32,4 @@ public interface FloorService {
      * */
     int getFloorNumber();
 
-    /**
-     * Returns vehicle spot on that particular floor.
-     * @return Integer value.
-     * */
-    int getVehicleSpot(String vehicleNumber);
 }
