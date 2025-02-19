@@ -5,6 +5,11 @@
 ## Project Overview:
 This project is about Parking Lot Design which has been implemented taken into consideration different design patterns like singleton, factory etc. The language used is Java and the IDE used is Intellij Idea. The project supports multiple floors, each having a same number of spots,  currently the parking of three vehicles Car, Bike and Truck is supported but it is extendible to adding more vehicles as well. Along with it a Command-line interface is also provided for user interaction.
 
+### UML Diagram
+![Project_image](src/com/demo/images/uml.jpg)
+
+Extracted from built-in extension provided by IntelliJ IDEA
+
 ## Tech Stack
 - Programming Language: **Java**
 - IDE: **IntelliJ IDEA**
